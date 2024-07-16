@@ -38,7 +38,7 @@ This repository contains a custom Extract, Transform, Load (ETL) pipeline that u
       - [utils.py](./etl/src/etl/utils.py): Implementation of the utilities required for the ETL pipeline
       - [config.yaml](./etl/src/etl/config.yaml): Configuration file of the ETL pipeline
 
-   4.4. **[logs](./etl/logs)**: This directory contains log files of the ETL pipeline
+   4.4. **[logs](./etl/src/logs)**: This directory contains log files of the ETL pipeline
 
    4.5. **[scripts](./etl/scripts)**: This directory contains bash and python scripts
 
