@@ -32,7 +32,7 @@ This repository contains a custom Extract, Transform, Load (ETL) pipeline that u
    4.3. **[src/etl](./etl/src/etl)**: This directory contains Python source code and configuration files requried for the ETL process. 
 
       - [init.py](./etl/src/etl/__init__.py): Initialises custom logger and defines necessary path variables
-      - [pipeline.py](./etl/src/etl/etl_pipeline.py): Implementation of the function which runs the ETL pipeline
+      - [pipeline.py](./etl/src/etl/pipeline.py): Implementation of the function which runs the ETL pipeline
       - [parser.py](./etl/src/etl/parser.py): Implementation of the parser with retrieves realty data from [RealtyYa](https://realty.ya.ru/sankt-peterburg/snyat/kvartira/) and saves raw data to the source database
       - [transformer.py](./etl/src/etl/transformer.py): Implementation of the transformer which transforms raw data from the source database to the form appropriate for the data analysis. Transformed data is then saved to the destination database.
       - [utils.py](./etl/src/etl/utils.py): Implementation of the utilities required for the ETL pipeline
