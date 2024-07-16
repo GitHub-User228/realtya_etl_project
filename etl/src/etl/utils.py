@@ -232,7 +232,8 @@ def ensure_annotations(
             non-valid type
 
     Returns:
-        function's call result | Any: Result of the function's call if
+        function's call result | Any:
+            Result of the function's call if
             all arguments have valid type. Returns default_replacement
             if any argument has a non-valid type and raise_error=False
     """
@@ -300,11 +301,14 @@ def read_yaml(path: Path, verbose: bool = True) -> dict:
     Reads a yaml file, and returns a dict.
 
     Args:
-        path_to_yaml (Path): Path to the yaml file
-        verbose (bool, default True): Whether to show logger's messages
+        path_to_yaml (Path):
+            Path to the yaml file
+        verbose (bool, default True):
+            Whether to show logger's messages
 
     Returns:
-        content (dict): The yaml content as a dict.
+        dict:
+            The yaml content as a dict.
     """
     try:
         with open(path) as yaml_file:
@@ -352,7 +356,7 @@ def read_txt(path: Path, verbose: bool = True) -> list[str]:
             Whether to show logger's messages
 
     Returns:
-        content (list[str]):
+        list[str]:
             The txt file content as a list of strings.
     """
     try:
@@ -372,7 +376,7 @@ def create_connection_engine(is_source_db: bool = False) -> Engine:
     Creates a connection engine to a database.
 
     Args:
-        is_source_db (bool, optional, default False):
+        is_source_db (bool, default False):
             Whether to draw table from the source database
 
     Returns:
@@ -428,7 +432,8 @@ def read_table_from_database(
                 - all: All data
 
     Returns:
-        df (pd.DataFrame): Data from the database
+        pd.DataFrame:
+            Data from the database
     """
     # Creating a connection engine
     engine = create_connection_engine(is_source_db=is_source_db)
@@ -563,7 +568,7 @@ def boolean(arg: str):
             Argument to be validated
 
     Returns:
-        output (bool):
+        bool:
             A corresponding bool value (in case of the appropriate
             argument's value)
     """
@@ -589,10 +594,12 @@ def get_bins(x: int) -> int:
     according to the number of the observations
 
     Args:
-        x (int): Number of the observations
+        x (int):
+            Number of the observations
 
     Returns:
-        n_bins (int): Number of bins
+        int:
+            Number of bins
     """
     if x > 0:
         n_bins = max(int(1 + 3.2 * np.log(x)), int(1.72 * x ** (1 / 3)))
