@@ -1,0 +1,217 @@
+cronjob:
+    username: root
+    schedule: '0 12 * * *'
+extraction:
+    main_table_name: 'realty'
+    bs_parser: 'html.parser'
+    url: 'https://realty.ya.ru/sankt-peterburg/snyat/kvartira/'
+    offers_url:  'https://realty.ya.ru'
+    number_of_pages: 25
+    max_number_of_offers_per_page: 26
+    timeout_between_requests: 0.1
+    waiting_time: 5.
+    number_of_tries: 5
+    use_proxy: False
+    headers:
+        accept: '*/*'
+        accept-language: 'ru,en;q=0.9,en-GB;q=0.8,en-US;q=0.7'
+        content-type: 'text/plain;charset=UTF-8'
+        cookie: 'receive-cookie-deprecation=1; yandexuid=3670764711699624800; yuidss=3670764711699624800; ymex=2015001917.yrts.1699641917; yashr=4853334081699641917; _ym_uid=1699642211376088606; my=YwA=; skid=9061980981701763873; amcuid=4842602511703602451; _ym_d=1715940588; bh=EkIiTWljcm9zb2Z0IEVkZ2UiO3Y9IjEyNSIsICJDaHJvbWl1bSI7dj0iMTI1IiwgIk5vdC5BL0JyYW5kIjt2PSIyNCIaBSJ4ODYiIg8iMTI1LjAuMjUzNS41MSIqAj8wMgIiIjoJIldpbmRvd3MiQggiMTUuMC4wIkoEIjY0IlJcIk1pY3Jvc29mdCBFZGdlIjt2PSIxMjUuMC4yNTM1LjUxIiwgIkNocm9taXVtIjt2PSIxMjUuMC42NDIyLjYwIiwgIk5vdC5BL0JyYW5kIjt2PSIyNC4wLjAuMCJaAj8w; is_gdpr=0; is_gdpr_b=CMWYJRDz/gEoAg==; gdpr=0; yandex_login=egor_udalov@mail.ru; receive-cookie-deprecation=1; yabs-vdrf=B7OHcZG3Jfem10; cycada=JWxQsEudtk4DLEr6rnKT5+pfeJwiIOPt0lrviP04+bs=; i=r6uzRm1c4S4I0OkWGL7TQWOdAt/eZTSXvfuYpxCLcAOTYJuz4n56AYtLiaTprRihfNIOs8wm+GOX6sMey0palov4p2Y=; Session_id=3:1720081101.5.0.1717504054863:iA5uWQ:24.1.2:1|947794303.-1.2.3:1717504054|3:10290943.881676.a7VqVT_K5bYoMSeo24cdPUlklps; sessar=1.1191.CiD4Ob_Xjs3nnkkuPZa-DZBa2QYj2JebKFMS00Kwyi6YRQ.KRUhopVYbTXdQHFQo5FsqUSc5zZM1nep_iuA0SG2_0c; sessionid2=3:1720081101.5.0.1717504054863:iA5uWQ:24.1.2:1|947794303.-1.2.3:1717504054|3:10290943.881676.fakesign0000000000000000000; _ym_isad=2; _ym_visorc=b; yp=1722876271.csc.1#1738334090.p_sw.1706798089#1737966529.p_undefined.1706430528#2033382470.pcs.1#1735965858.szm.1_5:1707x1067:819x945#2032864054.udn.cDplZ29yX3VkYWxvdkBtYWlsLnJ1; bh=EkEiTm90L0EpQnJhbmQiO3Y9IjgiLCAiQ2hyb21pdW0iO3Y9IjEyNiIsICJNaWNyb3NvZnQgRWRnZSI7dj0iMTI2IhoFIng4NiIiDyIxMjUuMC4yNTM1LjUxIioCPzAyAiIiOgkiV2luZG93cyJCCCIxNS4wLjAiSgQiNjQiUlwiTWljcm9zb2Z0IEVkZ2UiO3Y9IjEyNS4wLjI1MzUuNTEiLCAiQ2hyb21pdW0iO3Y9IjEyNS4wLjY0MjIuNjAiLCAiTm90LkEvQnJhbmQiO3Y9IjI0LjAuMC4wIloCPzBgm8mgtAY='
+        origin: 'https://realty.ya.ru'
+        priority: 'u=4, i'
+        referer: 'https://realty.ya.ru/sankt-peterburg/snyat/kvartira/'
+        sec-ch-ua: '"Not/A)Brand";v="8", "Chromium";v="126", "Microsoft Edge";v="126"'
+        sec-ch-ua-mobile: '?0'
+        sec-ch-ua-platform: '"Windows"'
+        sec-fetch-dest: 'empty'
+        sec-fetch-mode: 'no-cors'
+        sec-fetch-site: 'cross-site'
+        user-agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0'
+    parsing_fields:
+        main_field:
+            tag: 'a'
+            classes: ['Link Link_js_inited Link_size_m Link_theme_islands SerpItemLink OffersSerpItem__link OffersSerpItem__titleLink']
+        sub_fields:
+            flat_type:
+                tag: 'h1'
+                classes: ['OfferCardSummaryInfo__description--3-iC7']
+                return_first_parsed: True
+            main_info:
+                tag: 'div'
+                classes: ['OfferCardHighlight__container--2gZn2']
+                return_first_parsed: False
+            fee_info:
+                tag: 'span'
+                classes: ['OfferCardCheck__rowValue--bcPJA']
+                return_first_parsed: False
+            address_info:
+                tag: 'div'
+                classes: ['AddressWithGeoLinks__addressContainer--4jzfZ GeoLinks__addressGeoLinks--3UPum']
+                return_first_parsed: True
+            extra_features:
+                tag: 'div'
+                classes: ['OfferCardFeature__text--_Hmzv']
+                return_first_parsed: False
+transformation:
+    main_table_name: 'realty'
+    address_table_name: 'realty'
+    features:
+        flat_type:
+            features: ['n_rooms', 'is_studio']
+            transform_func: 'transform_flat_type'
+            process_per_observation: True
+        main_info:
+            features: ['area', 'floor', 'total_floors', 'height', 'construction_year']
+            transform_func: 'transform_main_info'
+            process_per_observation: True
+        fee_info:
+            features: ['has_pledge', 'pledge', 'commission_fee', 'utilities', 'price']
+            transform_func: 'transform_fee_info'
+            process_per_observation: True
+        address_info:
+            features: ['latitude', 'longitude']
+            transform_func: 'transform_address_info'
+            process_per_observation: False
+            address_adjustment:
+                Парголово: 'Санкт-Петербург, '
+                Шушары: 'Санкт-Петербург, '
+                Бугры: 'Ленинградская область, Всеволожский район, '
+                Кудрово: 'Ленинградская область, Всеволожский район, '
+        extra_features:
+            transform_func: 'transform_extra_features'
+            process_per_observation: True
+            features:
+                has_furniture:
+                    default: 
+                    values:
+                        'Мебель': True
+                        'Мебели нет': False
+                has_kitchen_furniture:
+                    default: 
+                    values:
+                        'Мебель на кухне': True
+                        'Мебели на кухне нет': False
+                building_type:
+                    default: 
+                    values:
+                        'Блочное здание': 'Блочное'
+                        'Кирпично-монолитное здание': 'Кирпично-монолитное'
+                        'Кирпичное здание': 'Кирпичное'
+                        'Монолитное здание': 'Монолитное'
+                        'Панельное здание': 'Панельное'
+                finishing_type:
+                    default: 
+                    values:
+                        'Отделка — требуется ремонт': 'нет'
+                        'Отделка — косметический ремонт': 'косметический'
+                        'Отделка — дизайнерский ремонт': 'дизайнерский'
+                        'Отделка — евроремонт': 'евро'
+                balcony_cnt:
+                    default: 0
+                    values:
+                        'Балкон': 1
+                        'Балкон и лоджия': 1
+                        'Два балкона': 2
+                loggia_cnt:
+                    default: 0
+                    values:
+                        'Лоджия': 1
+                        'Балкон и лоджия': 1
+                        'Две лоджии': 2
+                window_view_type:
+                    default: 
+                    values:
+                        'Вид из окон во двор': 'двор'
+                        'Вид из окон на улицу': 'улица'
+                        'Вид из окон во двор и на улицу': 'двор улица'
+                bathroom_type:
+                    default: 
+                    values:
+                        'Санузел раздельный': 'раздельный'
+                        'Санузел совмещённый': 'совмещённый'
+                        'Несколько санузлов': 'несколько'
+                parking_type:
+                    default: 
+                    values:
+                        'Открытая парковка': 'Открытая'
+                        'Закрытая парковка': 'Закрытая'
+                        'Подземная парковка': 'Подземная'
+                is_closed_area:
+                    default: 
+                    values:
+                        'Закрытая территория': True
+                        'Закрытой территории нет': False
+                is_pet_available:
+                    default: 
+                    values:
+                        'Можно с животными': True
+                        'Без животных': False
+                is_kid_available:
+                    default: 
+                    values:
+                        'Можно с детьми': True
+                        'Без детей': False
+                has_lift:
+                    default: 
+                    values:
+                        'Лифт': True
+                        'Лифта нет': False
+                has_internet:
+                    default: 
+                    values:
+                        'Интернет': True
+                        'Интернета нет': False
+                has_air_conditioner:
+                    default: 
+                    values:
+                        'Кондиционер': True
+                        'Кондиционера нет': False
+                heating_type:
+                    default: 
+                    values:
+                        'Центральное отопление': 'Центральное'
+                        'Автономное отопление': 'Автономное'
+                has_garbage_chute:
+                    default: 
+                    values:
+                        'Мусоропровод': True
+                        'Мусоропровода нет': False
+                has_security:
+                    default: 
+                    values:
+                        'Охрана/консьерж': True
+                        'Охраны или консьержа нет': False
+                has_dishwasher:
+                    default: 
+                    values:
+                        'Посудомойка': True
+                        'Посудомойки нет': False
+                has_alarm:
+                    default: 
+                    values:
+                        'Сигнализация': True
+                        'Сигнализации нет': False
+                has_washing_machine:
+                    default: 
+                    values:
+                        'Стиральная машина': True
+                        'Стиральной машины нет': False
+                has_tv:
+                    default: 
+                    values:
+                        'Телевизор': True
+                        'Телевизора нет': False
+                has_fridge:
+                    default: 
+                    values:
+                        'Холодильник': True
+                        'Холодильника нет': False
+                has_phone:
+                    default: 
+                    values:
+                        'Телефон': True
+                        'Телефона нет': False
+                is_individual_project:
+                    default: False
+                    values:
+                        'Индивидуальный проект': True

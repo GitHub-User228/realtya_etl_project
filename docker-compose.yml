@@ -1,0 +1,57 @@
+version: '3'
+
+services:
+
+  source_postgres:
+    image: postgres:15
+    restart: always
+    ports:
+      - '5433:5432'
+    networks:
+      - etl_network
+    volumes:
+      - source_postgres_db:/var/lib/postgresql/data
+      - ./source_db_init/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      POSTGRES_DB: source_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+
+  destination_postgres:
+    image: postgres:15
+    restart: always
+    ports:
+      - '5434:5432'
+    networks:
+      - etl_network
+    volumes:
+      - destination_postgres_db:/var/lib/postgresql/data
+      - ./destination_db_init/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      POSTGRES_DB: destination_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+
+  etl:
+    build:
+      context: ./etl
+    tty: true
+    ports:
+      - '8888:8888'
+    networks:
+      - etl_network
+    volumes:
+      - ./etl:/home/etl_project
+    depends_on:
+      - source_postgres
+      - destination_postgres
+    env_file:
+      - ./etl/env/.env
+      
+networks:
+  etl_network:
+    driver: bridge
+
+volumes:
+  source_postgres_db: 
+  destination_postgres_db: 
